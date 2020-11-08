@@ -24,11 +24,9 @@ class Main {
     } catch (FileNotFoundException e) {
       System.out.println("The file could not be found.");
       System.err.println("FileNotFoundException: " +e.getMessage());
-      return 1;
     } catch (IOException e) {
       System.out.println("Problem Reading File.");
       System.err.println("IOException: " +e.getMessage());
-      return 1;
     }
     return students;
   }
@@ -93,11 +91,20 @@ class Main {
     } else {
       System.out.println("We don't know what that means. Please try again.");
     }
-    System.out.println("When a student is present, please type in their name along with the letter p");
+    System.out.println("When a student is present, please type in their name along with the letter p\n");
     ArrayList<String> studentsPresent = new ArrayList<String>();
-    for (String i: readFile("students.txt")) {
-      
+    System.out.print("Enter the student's name: ");
+    String user_input = input.next().toLowerCase();
+    while (!user_input.equals("none")) {
+      if (readFile("students.txt").contains(user_input)) {
+        studentsPresent.add(user_input);
+      }
+      System.out.print("Enter the student's name: ");
+      user_input = input.next().toLowerCase();
     }
+    //oh ok you just passed some parameters
+    //gimme a second lemme search something up, ik i changed some of the readfile though
+    System.out.println("The students present are" + studentsPresent);
     // boolean flagger = false;
     // while (flagger == false) {
     //   System.out.print("Enter the student's name: ");
