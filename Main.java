@@ -78,6 +78,9 @@ class Main {
     }
   }
   public static void main(String[] args) {
+    //clears the console :)
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
     Scanner input = new Scanner(System.in);
     System.out.println("Would you like to use an existing file or would you like to overwrite the file?(type in either overwrite or existing):");
     String chosen = input.nextLine();
@@ -91,32 +94,33 @@ class Main {
     } else {
       System.out.println("We don't know what that means. Please try again.");
     }
+    //clears the console.
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
     System.out.println("When a student is present, please type in their name along with the letter p\n");
     ArrayList<String> studentsPresent = new ArrayList<String>();
+    ArrayList<String> notStudents = new ArrayList<String>();
+    ArrayList<String> temp = new ArrayList<String>();
+    String notPart = "";
     System.out.print("Enter the student's name: ");
     String user_input = input.next().toLowerCase();
     while (!user_input.equals("none")) {
       if (readFile("students.txt").contains(user_input)) {
         studentsPresent.add(user_input);
+      } else if (!readFile("students.txt").contains(user_input)) {
+        notStudents.add(user_input);        
       }
       System.out.print("Enter the student's name: ");
       user_input = input.next().toLowerCase();
     }
-    //oh ok you just passed some parameters
-    //gimme a second lemme search something up, ik i changed some of the readfile though
-    System.out.println("The students present are" + studentsPresent);
-    // boolean flagger = false;
-    // while (flagger == false) {
-    //   System.out.print("Enter the student's name: ");
-    //   String studentNamePresent = input.next();
-    //   for (int i=0;i<studentNamePresent.length();i++) {
-    //     // String studentName = studentName.isWhiteSpace(studentNamePresent.charAt(i));
-    //     String studentName = studentNamePresent.replaceAll("", " ");
-    //     System.out.println(studentName);
-    //     //having problems, gonna get help
-    //   }
-      
-    // }
+    temp = readFile("students.txt");
+    notPart = String.join(" , ", notStudents);
+    //clears the console again :)
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    System.out.println("Students present: " + studentsPresent + "\nStudents that weren't apart of the class: " + notPart);
+    temp.removeAll(studentsPresent);
+     System.out.println("Students Absent: " + temp.toString());
     input.close();
   }
 }
