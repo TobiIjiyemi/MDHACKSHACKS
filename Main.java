@@ -39,25 +39,22 @@ class Main {
     System.out.println("Your students: " + students);
     try {
       File students_file = new File("students.txt");
+      FileWriter myWriter = new FileWriter("students.txt");
       if (students_file.createNewFile()) {
         System.out.println("File created: " + students_file.getName());
         for (int a = 0; a < students.size(); a++) {
-          students_file.write(students.get(a) + "\n");
+          myWriter.write(students.get(a) + "\n");
         }
-        students_file.close();
+        myWriter.close();
       } else {
         for (int a = 0; a < students.size(); a++) {
-          students_file.write(students.get(a) + "\n");
+          myWriter.write(students.get(a) + "\n");
         }
-        students_file.close();
+        myWriter.close();
       }
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    //String[] students = s.next().split(",");
-    //for (int i = 0; i < students.length(); i++) {
-      
-    //}
   }
 }
