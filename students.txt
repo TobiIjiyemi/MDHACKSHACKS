@@ -1,10 +1,3 @@
-bob
-goku
-han
-jim
-john
-picolo
-qexa
-vishal
-will
-yox
+tobi
+visu
+yash

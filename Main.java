@@ -1,6 +1,5 @@
 /*
 Visu Vasa
-Visu Vasa
 Yash Santhosh
 Tobi Ijiyemi
 */
@@ -10,7 +9,30 @@ import java.lang.String;
 import java.util.Collections;
 import java.io.*;
 class Main {
-  public static void main(String[] args) {
+  public static ArrayList<String> readFile(String file) {
+    File readerFile = new File(file);
+    ArrayList<String> students = new ArrayList<String>();
+    try {
+      String studentsInTxt;
+      FileReader in = new FileReader(file);
+      BufferedReader readTxt = new BufferedReader(in);
+      while ((studentsInTxt = readTxt.readLine()) != null) {
+        students.add(studentsInTxt);
+      }
+      readTxt.close();
+      in.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("The file could not be found.");
+      System.err.println("FileNotFoundException: " +e.getMessage());
+      return 1;
+    } catch (IOException e) {
+      System.out.println("Problem Reading File.");
+      System.err.println("IOException: " +e.getMessage());
+      return 1;
+    }
+    return students;
+  }
+  public static void overWriteFile() {
     ArrayList<String> students = new ArrayList<String>();
     Scanner s = new Scanner(System.in);
     System.out.print("Enter the number of students: ");
@@ -56,5 +78,38 @@ class Main {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+  }
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    System.out.println("Would you like to use an existing file or would you like to overwrite the file?(type in either overwrite or existing):");
+    String chosen = input.nextLine();
+    if (chosen.equals("overwrite")) {
+      System.out.println("Overwriting...");
+      overWriteFile();
+      readFile("students.txt");
+    } else if (chosen.equals("existing")) {
+      System.out.println("Retrieving Existing File...");
+      readFile("students.txt");
+    } else {
+      System.out.println("We don't know what that means. Please try again.");
+    }
+    System.out.println("When a student is present, please type in their name along with the letter p");
+    ArrayList<String> studentsPresent = new ArrayList<String>();
+    for (String i: readFile("students.txt")) {
+      
+    }
+    // boolean flagger = false;
+    // while (flagger == false) {
+    //   System.out.print("Enter the student's name: ");
+    //   String studentNamePresent = input.next();
+    //   for (int i=0;i<studentNamePresent.length();i++) {
+    //     // String studentName = studentName.isWhiteSpace(studentNamePresent.charAt(i));
+    //     String studentName = studentNamePresent.replaceAll("", " ");
+    //     System.out.println(studentName);
+    //     //having problems, gonna get help
+    //   }
+      
+    // }
+    input.close();
   }
 }
