@@ -54,7 +54,6 @@ class Main {
       nameTemp = nameTemp.toLowerCase();
       students.add(nameTemp);
     }
-    s.close();
     Collections.sort(students);
     System.out.println("Your students: " + students);
     try {
@@ -97,7 +96,7 @@ class Main {
     //clears the console.
     System.out.print("\033[H\033[2J");
     System.out.flush();
-    System.out.println("When a student is present, please type in their name along with the letter p\n");
+    System.out.println("When a student is present, please type in their name, when you're finished type none\n");
     ArrayList<String> studentsPresent = new ArrayList<String>();
     ArrayList<String> notStudents = new ArrayList<String>();
     ArrayList<String> temp = new ArrayList<String>();
